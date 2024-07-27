@@ -1,1 +1,204 @@
-<h1>Hello! Hello!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3 Line Chart with Multiple Lines and Axis Labels</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        .line {
+            fill: none;
+            stroke-width: 2px;
+        }
+        .axis path,
+        .axis line {
+            fill: none;
+            shape-rendering: crispEdges;
+        }
+        .line1 {
+            stroke: steelblue;
+        }
+        .line2 {
+            stroke: tomato;
+        }
+        .line3 {
+            stroke: green;
+        }
+        .axis-label {
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <svg width="1200" height="1000"></svg>
+    
+    <script>
+        // Hardcoded data
+        const morphyData = [
+            { year: 1849, edo: 2692 },
+            { year: 1850, edo: 2720 },
+            { year: 1851, edo: 2738 },
+            { year: 1852, edo: 2756 },
+            { year: 1853, edo: 2775 },
+            { year: 1854, edo: 2793 },
+            { year: 1855, edo: 2789 },
+            { year: 1856, edo: 2795 },
+            { year: 1857, edo: 2800 },
+            { year: 1858, edo: 2794 },
+            { year: 1859, edo: 2809 },
+            { year: 1860, edo: 2811 },
+            { year: 1861, edo: 2775 },
+            { year: 1862, edo: 2740 },
+            { year: 1863, edo: 2714 },
+            { year: 1864, edo: 2701 },
+            { year: 1865, edo: 2691 },
+            { year: 1866, edo: 2689 },
+            { year: 1867, edo: 2687 },
+            { year: 1868, edo: 2685 },
+            { year: 1869, edo: 2683 }
+        ];
+
+        const capablancaData = [
+            { year: 1906, edo: 2566 },
+            { year: 1907, edo: 2604 },
+            { year: 1908, edo: 2650 },
+            { year: 1909, edo: 2681 },
+            { year: 1910, edo: 2673 },
+            { year: 1911, edo: 2701 },
+            { year: 1912, edo: 2721 },
+            { year: 1913, edo: 2750 },
+            { year: 1914, edo: 2781 },
+            { year: 1915, edo: 2788 },
+            { year: 1916, edo: 2781 },
+            { year: 1917, edo: 2794 },
+            { year: 1918, edo: 2807 },
+            { year: 1919, edo: 2819 },
+            { year: 1920, edo: 2805 },
+            { year: 1921, edo: 2791 },
+            { year: 1922, edo: 2773 },
+            { year: 1923, edo: 2750 },
+            { year: 1924, edo: 2726 },
+            { year: 1925, edo: 2696 },
+            { year: 1926, edo: 2686 },
+            { year: 1927, edo: 2681 },
+            { year: 1928, edo: 2664 },
+            { year: 1929, edo: 2637 },
+            { year: 1930, edo: 2637 },
+            { year: 1931, edo: 2644 },
+            { year: 1932, edo: 2629 },
+            { year: 1933, edo: 2614 },
+            { year: 1934, edo: 2599 },
+            { year: 1935, edo: 2605 },
+            { year: 1936, edo: 2625 },
+            { year: 1937, edo: 2591 },
+            { year: 1938, edo: 2569 },
+            { year: 1939, edo: 2560 }
+        ];
+
+        const fischerData = [
+            { year: 1961, edo: 2767 },
+            { year: 1962, edo: 2738 },
+            { year: 1963, edo: 2752 },
+            { year: 1964, edo: 2788 },
+            { year: 1965, edo: 2774 },
+            { year: 1966, edo: 2744 },
+            { year: 1967, edo: 2805 },
+            { year: 1968, edo: 2801 },
+            { year: 1969, edo: 2795 },
+            { year: 1970, edo: 2788 },
+            { year: 1971, edo: 2885 },
+            { year: 1972, edo: 2893 },
+            { year: 1973, edo: 2865 },
+            { year: 1974, edo: 2829 }
+        ];
+
+        // Parse the date / time
+        const parseYear = d3.timeParse("%Y");
+
+        // Format the data
+        morphyData.forEach(d => d.year = parseYear(d.year.toString()));
+        capablancaData.forEach(d => d.year = parseYear(d.year.toString()));
+        fischerData.forEach(d => d.year = parseYear(d.year.toString()));
+
+        function renderGraph(data1, data2, data3) {
+            const svg = d3.select("svg"),
+                  margin = {top: 50, right: 30, bottom: 70, left: 70}, // Adjusted margin to fit title
+                  width = +svg.attr("width") - margin.left - margin.right,
+                  height = +svg.attr("height") - margin.top - margin.bottom,
+                  g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+            // Append title
+            svg.append("text")
+                .attr("x", (width + margin.left + margin.right) / 2)
+                .attr("y", margin.top / 2)
+                .attr("text-anchor", "middle")
+                .attr("font-size", "24px")
+                .attr("font-weight", "bold")
+                .text("Chess Players from the Past (Morphy, Capablanca, Fischer)");
+
+            const x = d3.scaleTime()
+                        .domain([d3.min([...data1, ...data2, ...data3], d => d.year), d3.max([...data1, ...data2, ...data3], d => d.year)])
+                        .range([0, width]);
+
+            const y = d3.scaleLinear()
+                        .domain([d3.min([...data1, ...data2, ...data3], d => d.edo) - 10, d3.max([...data1, ...data2, ...data3], d => d.edo) + 10])
+                        .range([height, 0]);
+
+            const line = d3.line()
+                           .x(d => x(d.year))
+                           .y(d => y(d.edo));
+
+            g.append("g")
+             .attr("transform", `translate(0,${height})`)
+             .call(d3.axisBottom(x))
+             .append("text")
+             .attr("y", 50)
+             .attr("x", width / 2)
+             .attr("fill", "#000")
+             .attr("class", "axis-label")
+             .style("text-anchor", "middle")
+             .text("Year");
+
+            g.append("g")
+             .call(d3.axisLeft(y))
+             .append("text")
+             .attr("transform", "rotate(-90)")
+             .attr("y", -60)
+             .attr("x", -height / 2)
+             .attr("fill", "#000")
+             .attr("class", "axis-label")
+             .style("text-anchor", "middle")
+             .text("EDO / ELO");
+
+            g.append("path")
+             .datum(data1)
+             .attr("class", "line line1")
+             .attr("d", line);
+
+            g.append("path")
+             .datum(data2)
+             .attr("class", "line line2")
+             .attr("d", line);
+
+            g.append("path")
+             .datum(data3)
+             .attr("class", "line line3")
+             .attr("d", line);
+
+            // Handmade legend
+            svg.append("circle").attr("cx",1020).attr("cy",830).attr("r", 6).style("fill", "steelblue")
+            svg.append("circle").attr("cx",1020).attr("cy",860).attr("r", 6).style("fill", "tomato")
+            svg.append("circle").attr("cx",1020).attr("cy",890).attr("r", 6).style("fill", "green")
+            svg.append("text").attr("x", 1040).attr("y", 830).text("Morphy, Paul").style("font-size", "15px").attr("alignment-baseline","middle")
+            svg.append("text").attr("x", 1040).attr("y", 860).text("Capablanca, José").style("font-size", "15px").attr("alignment-baseline","middle")
+            svg.append("text").attr("x", 1040).attr("y", 890).text("Fischer, Robert James").style("font-size", "15px").attr("alignment-baseline","middle")
+        }
+
+        // Render the graph with the hardcoded data
+        renderGraph(morphyData, capablancaData, fischerData);
+
+        
+    </script>
+</body>
+</html>
