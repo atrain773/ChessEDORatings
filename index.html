@@ -31,7 +31,24 @@
     </style>
 </head>
 <body>
+  <script>
+    function changeTextMorphy() {
+        document.getElementById("displayed-text").innerText = "Paul Morphy, born on June 22, 1837, in New Orleans, Louisiana, is often considered one of the greatest chess prodigies in history. Known as the Pride and Sorrow of Chess, Morphy displayed an extraordinary talent for the game from a young age, defeating experienced players with ease. By the age of 21, he was recognized as the unofficial world chess champion after his victories over Europe's top players. Morphy's playing style was characterized by its clarity, creativity, and tactical brilliance, setting new standards in chess theory. Despite his short career, which he ended abruptly in 1859 to pursue a legal career, Morphy's contributions to chess remain influential, and he is remembered as a pioneer who elevated the game's competitive and intellectual standards.";
+    }
+    function changeTextCapablanca() {
+        document.getElementById("displayed-text").innerText = "José Raúl Capablanca, born on November 19, 1888, in Havana, Cuba, is widely regarded as one of the greatest chess players of all time. Renowned for his exceptional endgame skill and seemingly effortless style, Capablanca became the World Chess Champion in 1921 by defeating Emanuel Lasker. His natural talent for the game was evident from an early age, and he quickly rose to prominence with his keen positional understanding and flawless technique. Capablanca's reign as World Champion lasted until 1927 when he was defeated by Alexander Alekhine. His contributions to chess theory, particularly in the endgame, and his clear, intuitive approach to the game have left a lasting legacy, inspiring generations of chess players. Capablanca's ability to simplify complex positions and his strategic precision continue to be studied and admired by chess enthusiasts worldwide.";
+    }
+    function changeTextFischer() {
+        document.getElementById("displayed-text").innerText = "Bobby Fischer, born on March 9, 1943, in Chicago, Illinois, is one of the most iconic and enigmatic figures in chess history. Fischer's extraordinary talent emerged early, and by the age of 14, he won the U.S. Chess Championship, a title he would claim eight times. His relentless quest for chess excellence culminated in 1972 when he became the World Chess Champion by defeating Boris Spassky in a match that captivated the world and symbolized Cold War tensions. Fischer's playing style was marked by profound strategic insight, meticulous preparation, and a fierce will to win. However, his career was also marred by controversy, including his withdrawal from competitive chess and erratic behavior. Despite his tumultuous life, Fischer's contributions to chess, particularly his profound understanding of the game and his innovative ideas, have left an indelible mark, making him a legend in the chess world.";
+    }
+    </script>
     <svg width="1200" height="1000"></svg>
+    <img src="Paul Morphy.png" onclick="changeTextMorphy()" style="position:absolute; top:50px; right:200px; width:150px; height:auto;">
+    <img src="José Capablanca.png" onclick="changeTextCapablanca()" style="position:absolute; top:205px; right:200px; width:150px; height:auto;">
+    <img src="Bobby Fischer.png" onclick="changeTextFischer()" style="position:absolute; top:350px; right:200px; width:150px; height:auto;">
+    <div id="displayed-text" style = "position:absolute; top:540px; right:75px; width:400px; height:400px; border:2px solid black;">
+      Click the image above to change this text 
+    </div>
     
     <script>
         // Hardcoded data
@@ -164,12 +181,12 @@
              .call(d3.axisLeft(y))
              .append("text")
              .attr("transform", "rotate(-90)")
-             .attr("y", -60)
+             .attr("y", -50)
              .attr("x", -height / 2)
              .attr("fill", "#000")
              .attr("class", "axis-label")
              .style("text-anchor", "middle")
-             .text("EDO / ELO");
+             .text("EDO");
 
             g.append("path")
              .datum(data1)
@@ -195,10 +212,10 @@
             svg.append("text").attr("x", 1040).attr("y", 890).text("Fischer, Robert James").style("font-size", "15px").attr("alignment-baseline","middle")
         }
 
-        // Render the graph with the hardcoded data
         renderGraph(morphyData, capablancaData, fischerData);
 
         
     </script>
+    
 </body>
 </html>
