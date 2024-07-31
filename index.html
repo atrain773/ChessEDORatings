@@ -32,22 +32,50 @@
 </head>
 <body>
   <script>
-    function changeTextMorphy() {
-        document.getElementById("displayed-text").innerText = "Paul Morphy, born on June 22, 1837, in New Orleans, Louisiana, is often considered one of the greatest chess prodigies in history. Known as the Pride and Sorrow of Chess, Morphy displayed an extraordinary talent for the game from a young age, defeating experienced players with ease. By the age of 21, he was recognized as the unofficial world chess champion after his victories over Europe's top players. Morphy's playing style was characterized by its clarity, creativity, and tactical brilliance, setting new standards in chess theory. Despite his short career, which he ended abruptly in 1859 to pursue a legal career, Morphy's contributions to chess remain influential, and he is remembered as a pioneer who elevated the game's competitive and intellectual standards.";
+    function changeText(x) {
+
+        if (x === 'A'){
+          document.getElementById("displayed-text").innerText = "Click the images above to change this text";
+          d3.select(".line1").style("visibility", "visible");
+          d3.select(".line2").style("visibility", "visible");
+          d3.select(".line3").style("visibility", "visible");
+        }
+        
+        if (x === 'M'){
+          document.getElementById("displayed-text").innerText = "Born in New Orleans of Creole descent, Paul Morphy learned chess at 8 and by 13 was one of the best players in the country. He won the First American Chess Congress in 1857, becoming the second official U.S. Champion. In 1858, having passed the Louisiana bar exam at an age too young to practice law, he moved to Europe, where he proved his superiority by defeating some of the continent’s best players. During his time across the Atlantic, he was hailed as the world chess champion, though no formal competition yet existed to determine the title. He returned home in 1859 an acclaimed national hero, with baseball clubs and cigars being named after him. Inexplicably, however, Morphy did not play serious chess again. At a time when chess was considered an amateur activity rather than a professional career, he turned his attention to his ultimately unsuccessful law practice, then lived off his family fortune until his death in 1884. His mental state deteriorated dramatically during his years in seclusion; decades later, Morphy’s incredible talent and eventual downfall would be mirrored in the life of Bobby Fischer. - https://worldchesshof.org/hof-inductee/paul-charles-morphy";
+          d3.select(".line1").style("visibility", "visible");
+          d3.select(".line2").style("visibility", "hidden");
+          d3.select(".line3").style("visibility", "hidden");
+        }
+
+        if (x === 'C') {
+          document.getElementById("displayed-text").innerText = "Nicknamed “The Human Chess Machine,” José Raúl Capablanca was born in Havana, Cuba. A true prodigy, he learned chess at age four and defeated Cuban champion Juan Corzo at 13. While attending Columbia University, he joined the Manhattan Chess Club and soon became its strongest player. He had a particular talent for rapid chess, defeating World Champion Emanuel Lasker in 1906. He eventually withdrew from Columbia to focus on chess. His skill in rapid chess lent itself to simultaneous exhibitions. On a nationwide tour of 27 cities in 1909, he achieved a winning score of 96.9% over 607 games. He held exhibitions in London, Paris, and Berlin before his ultimate destination of Saint Petersburg in 1914, where he played and narrowly lost to Lasker. World War I halted international competition, but Capablanca continued to compete and dominate, losing only one game between 1914 and 1924. In 1921, Capablanca and Lasker competed in the 3rd World Chess Championship, where Lasker resigned after losing four straight games. Capablanca held the title until 1927. -https://worldchesshof.org/hof-inductee/jos%C3%A9-ra%C3%BAl-capablanca";
+          d3.select(".line1").style("visibility", "hidden");
+          d3.select(".line2").style("visibility", "visible");
+          d3.select(".line3").style("visibility", "hidden");
+        }
+
+        if (x === 'F') {
+          document.getElementById("displayed-text").innerText = "As the 11th World Champion from 1972-75, Bobby Fischer interrupted the Cold War Soviet hegemony of chess. His phenomenal skill was apparent from an early age. He won the U.S. Open in 1957 and was the youngest person to gain first place in the U.S. Chess Championship in 1957/58. He would go on to win all eight of the United States Chess Championships in which he participated, and in the 1963/64 competition he became the only player to achieve a perfect score in the event. My 60 Memorable Games, which Fischer authored in 1969, is widely considered one of the greatest pieces of chess literature. He made valuable contributions to opening theory and was renowned for his opening preparation and endgame technique alike. Fischer is best remembered, however, for his win at the 1972 World Championship, defeating Boris Spassky in the most famous match of modern times. From 1970 to 1971, Fischer won 20 consecutive games in world championship qualifying events—an all-time record. - https://worldchesshof.org/hof-inductee/robert-bobby-james-fischer";
+          d3.select(".line1").style("visibility", "hidden");
+          d3.select(".line2").style("visibility", "hidden");
+          d3.select(".line3").style("visibility", "visible");
+        }
+
+
     }
-    function changeTextCapablanca() {
-        document.getElementById("displayed-text").innerText = "José Raúl Capablanca, born on November 19, 1888, in Havana, Cuba, is widely regarded as one of the greatest chess players of all time. Renowned for his exceptional endgame skill and seemingly effortless style, Capablanca became the World Chess Champion in 1921 by defeating Emanuel Lasker. His natural talent for the game was evident from an early age, and he quickly rose to prominence with his keen positional understanding and flawless technique. Capablanca's reign as World Champion lasted until 1927 when he was defeated by Alexander Alekhine. His contributions to chess theory, particularly in the endgame, and his clear, intuitive approach to the game have left a lasting legacy, inspiring generations of chess players. Capablanca's ability to simplify complex positions and his strategic precision continue to be studied and admired by chess enthusiasts worldwide.";
-    }
-    function changeTextFischer() {
-        document.getElementById("displayed-text").innerText = "Bobby Fischer, born on March 9, 1943, in Chicago, Illinois, is one of the most iconic and enigmatic figures in chess history. Fischer's extraordinary talent emerged early, and by the age of 14, he won the U.S. Chess Championship, a title he would claim eight times. His relentless quest for chess excellence culminated in 1972 when he became the World Chess Champion by defeating Boris Spassky in a match that captivated the world and symbolized Cold War tensions. Fischer's playing style was marked by profound strategic insight, meticulous preparation, and a fierce will to win. However, his career was also marred by controversy, including his withdrawal from competitive chess and erratic behavior. Despite his tumultuous life, Fischer's contributions to chess, particularly his profound understanding of the game and his innovative ideas, have left an indelible mark, making him a legend in the chess world.";
-    }
+    
     </script>
-    <svg width="1200" height="1000"></svg>
-    <img src="Paul Morphy.png" onclick="changeTextMorphy()" style="position:absolute; top:50px; right:200px; width:150px; height:auto;">
-    <img src="José Capablanca.png" onclick="changeTextCapablanca()" style="position:absolute; top:205px; right:200px; width:150px; height:auto;">
-    <img src="Bobby Fischer.png" onclick="changeTextFischer()" style="position:absolute; top:350px; right:200px; width:150px; height:auto;">
+    <svg width="1200" height="1000" onclick="changeText('A')">
+      <text x="200" y="250" stroke="steelblue" font-size="18">Peak Rating: 2811</text>
+      <text x="700" y="225" stroke="tomato" font-size="18">Peak Rating: 2819</text>
+      <text x="1000" y="50" stroke="green" font-size="18">Peak Rating: 2893</text>
+    </svg>
+    <img src="Paul Morphy.png" onclick="changeText('M')" style="position:absolute; top:50px; right:200px; width:150px; height:auto;">
+    <img src="José Capablanca.png" onclick="changeText('C')" style="position:absolute; top:205px; right:200px; width:150px; height:auto;">
+    <img src="Bobby Fischer.png" onclick="changeText('F')" style="position:absolute; top:350px; right:200px; width:150px; height:auto;">
     <div id="displayed-text" style = "position:absolute; top:540px; right:75px; width:400px; height:400px; border:2px solid black;">
-      Click the image above to change this text 
+      Click the images above to change this text 
     </div>
     
     <script>
@@ -166,56 +194,3 @@
                            .x(d => x(d.year))
                            .y(d => y(d.edo));
 
-            g.append("g")
-             .attr("transform", `translate(0,${height})`)
-             .call(d3.axisBottom(x))
-             .append("text")
-             .attr("y", 50)
-             .attr("x", width / 2)
-             .attr("fill", "#000")
-             .attr("class", "axis-label")
-             .style("text-anchor", "middle")
-             .text("Year");
-
-            g.append("g")
-             .call(d3.axisLeft(y))
-             .append("text")
-             .attr("transform", "rotate(-90)")
-             .attr("y", -50)
-             .attr("x", -height / 2)
-             .attr("fill", "#000")
-             .attr("class", "axis-label")
-             .style("text-anchor", "middle")
-             .text("EDO");
-
-            g.append("path")
-             .datum(data1)
-             .attr("class", "line line1")
-             .attr("d", line);
-
-            g.append("path")
-             .datum(data2)
-             .attr("class", "line line2")
-             .attr("d", line);
-
-            g.append("path")
-             .datum(data3)
-             .attr("class", "line line3")
-             .attr("d", line);
-
-            // Handmade legend
-            svg.append("circle").attr("cx",1020).attr("cy",830).attr("r", 6).style("fill", "steelblue")
-            svg.append("circle").attr("cx",1020).attr("cy",860).attr("r", 6).style("fill", "tomato")
-            svg.append("circle").attr("cx",1020).attr("cy",890).attr("r", 6).style("fill", "green")
-            svg.append("text").attr("x", 1040).attr("y", 830).text("Morphy, Paul").style("font-size", "15px").attr("alignment-baseline","middle")
-            svg.append("text").attr("x", 1040).attr("y", 860).text("Capablanca, José").style("font-size", "15px").attr("alignment-baseline","middle")
-            svg.append("text").attr("x", 1040).attr("y", 890).text("Fischer, Robert James").style("font-size", "15px").attr("alignment-baseline","middle")
-        }
-
-        renderGraph(morphyData, capablancaData, fischerData);
-
-        
-    </script>
-    
-</body>
-</html>
